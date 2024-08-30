@@ -7,10 +7,11 @@ import LoginScreen from './Screens/LoginScreen/LoginScreen';
 import ForgotPasswordScreen from './Screens/ForgetPassword/ForgotPasswordScreen';
 import EnterNewPasswordScreen from './Screens/EnterNewPasswordScreen/EnterNewPasswordScreen';
 import HomepageScreen from './Screens/HomepageScreen/HomepageScreen';
-import Tab1Screen from './Screens/Tab1Screen/Tab1Screen';
+import Leaves from './Screens/LeaveScreen/LeaveScreen';
 import Tab2Screen from './Screens/Tab2Screen/Tab2Screen';
 import Register from './Screens/RegisterScreen/RegisterScreen'
 import Verification from './Screens/Verification/VerificationScreen';
+import ProfileScreen from './Screens/ProfileScreen/ProfileScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -19,10 +20,10 @@ function TabsNavigator() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Home" component={HomepageScreen} options={{ headerShown: false }}/>
-      <Tab.Screen name="Tab1" component={Tab1Screen} options={{ headerShown: false }}/>
+      <Tab.Screen name="Leaves" component={Leaves} options={{ headerShown: false }}/>
       <Tab.Screen name="Tab2" component={Tab2Screen} options={{ headerShown: false }}/>
       <Tab.Screen name="Tab3" component={Tab2Screen} options={{ headerShown: false }}/>
-      <Tab.Screen name="Tab4" component={Tab2Screen} options={{ headerShown: false }}/>
+      <Tab.Screen name="ProfileScreen" component={ProfileScreen} options={{ headerShown: false }}/>
     </Tab.Navigator>
   );
 }

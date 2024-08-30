@@ -197,7 +197,7 @@ export const styles = StyleSheet.create({
   },
   resendText: {
     fontSize: 14,
-    color: 'blue',
+    color: '#007AFF',
     marginLeft: 5,
   },
   });
