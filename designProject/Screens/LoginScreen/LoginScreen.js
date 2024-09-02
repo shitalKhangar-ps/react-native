@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import styles from './LoginScreenStyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { ScrollView } from 'react-native-gesture-handler';
 
 function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
@@ -13,22 +12,26 @@ function LoginScreen({ navigation }) {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
-  return (
-    <ScrollView>
-    <View style={styles.container}>
-      <View style={styles.iconContainer}>
-        <Image source={require('../../images/LoginIcon.png')} style={{ borderWidth: 1 }} />
+  const welcomeContainer = () => {
+    return (
+      <View>
+        <View style={styles.iconContainer}>
+          <Image source={require('../../images/LoginIcon.png')} />
+        </View>
+        <View style={styles.welcomeContainer}>
+          <Text style={styles.welcomText}>Welcome Back 👋</Text>
+          <Text style={styles.welcomText}>
+            <Text>to </Text>
+            <Text style={styles.highlightedColor}>HR Attendee</Text>
+          </Text>
+          <Text style={styles.logtocontinue}>Hello there, login to continue</Text>
+        </View>
       </View>
+    )
+  }
 
-      <View style={styles.welcomeContainer}>
-        <Text style={styles.welcomText}>Welcome Back 👋</Text>
-        <Text style={styles.welcomText}>
-          <Text>to </Text>
-          <Text style={styles.highlightedColor}>HR Attendee</Text>
-        </Text>
-        <Text style={styles.logtocontinue}>Hello there, login to continue</Text>
-      </View>
-
+  const formContainer = () => {
+    return (
       <View style={styles.formContainer}>
         <View style={styles.inputWrapper}>
           <Text style={styles.label}>Email Address</Text>
@@ -68,7 +71,6 @@ function LoginScreen({ navigation }) {
             <Text style={styles.forgetPassText}>Forget Password?</Text>
           </TouchableOpacity>
         </View>
-
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate('Tabs')}>
@@ -88,19 +90,30 @@ function LoginScreen({ navigation }) {
           </TouchableOpacity>
         </View>
       </View>
+    )
+  }
 
+  const registerContainer = () => {
+    return (
       <View style={styles.registerContainer}>
         <View style={styles.registerTextContainer}>
           <Text style={styles.text}>Didn’t have an account? </Text>
-          <TouchableOpacity >
-            <Text style={styles.registerText}
-              onPress={() => navigation.navigate('Register')}
-            >Register</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+            <Text style={styles.registerText}>Register</Text>
           </TouchableOpacity>
         </View>
       </View>
-    </View>
-    </ScrollView>
+    )
+  }
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.contentContainerStyle}>
+        {welcomeContainer()}
+        {formContainer()}
+        {registerContainer()}
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 

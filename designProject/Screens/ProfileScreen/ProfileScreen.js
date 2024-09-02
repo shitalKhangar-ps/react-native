@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, Image, TouchableOpacity, FlatList, SafeAreaView, ScrollView } from 'react-native';
 import styles from './ProfileScreenStyles';
 
 const options = [
@@ -11,33 +11,39 @@ const options = [
 ];
 
 const ProfileScreen = () => {
-    return (
-        <View style={styles.container}>
-            <View style={styles.profileSection}>
-                <View style={styles.ProflePicEditContainer}>
-                    <Image
-                        source={require('../../images/profilepic.png')}
-                        style={styles.profileImage}
-                    />
-                    <TouchableOpacity style={styles.editIcon}>
+
+    const profileSection = () => {
+        return (
+            <View>
+                <View style={styles.profileSection}>
+                    <View style={styles.ProflePicEditContainer}>
                         <Image
-                            source={require('../../images/Editprofile.png')}
-                            style={styles.EditIcon}
+                            source={require('../../images/profilepic.png')}
+                            style={styles.profileImage}
                         />
-                    </TouchableOpacity>
+                        <TouchableOpacity style={styles.editIcon}>
+                            <Image
+                                source={require('../../images/Editprofile.png')}
+                                style={styles.EditIcon}
+                            />
+                        </TouchableOpacity>
 
+                    </View>
+                    <View style={styles.profileInfo}>
+                        <Text style={styles.profileName}>Michael Mitc</Text>
+                        <Text style={styles.profileTitle}>Lead UI/UX Designer</Text>
+                    </View>
                 </View>
-                <View style={styles.profileInfo}>
-                    <Text style={styles.profileName}>Michael Mitc</Text>
-                    <Text style={styles.profileTitle}>Lead UI/UX Designer</Text>
-                </View>
-
+                <TouchableOpacity style={styles.editProfileButton}>
+                    <Text style={styles.editProfileButtonText}>Edit Profile</Text>
+                </TouchableOpacity>
             </View>
+        )
+    }
 
-            <TouchableOpacity style={styles.editProfileButton}>
-                <Text style={styles.editProfileButtonText}>Edit Profile</Text>
-            </TouchableOpacity>
 
+    const menuItemContainer = () => {
+        return (
             <View style={styles.menuItemContainer}>
                 <FlatList
                     data={options}
@@ -59,7 +65,17 @@ const ProfileScreen = () => {
                     keyExtractor={(item) => item.id}
                 />
             </View>
-        </View>
+        )
+    }
+
+
+    return (
+        <SafeAreaView style={styles.container}>
+            <ScrollView>
+                {profileSection()}
+                {menuItemContainer()}
+            </ScrollView>
+        </SafeAreaView>
     );
 };
 

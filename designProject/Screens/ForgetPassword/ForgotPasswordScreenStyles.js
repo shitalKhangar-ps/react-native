@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     borderRadius: 10,
     alignItems: 'center',
-    marginTop: 30,
+    marginVertical: 30,
   },
   continueButtonText: {
     color: '#fff',

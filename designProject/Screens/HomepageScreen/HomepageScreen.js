@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, Image, TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
 import styles from './HomepageScreenStyles';
 import SwipeButton from '../../components/SwipeButton/SwipeButton';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const getFormattedDates = () => {
   const today = new Date();
   const dates = [];
-
   for (let i = -3; i <= 3; i++) {
     const date = new Date(today);
     date.setDate(today.getDate() + i);
@@ -15,13 +15,13 @@ const getFormattedDates = () => {
     dates.push(`${day} ${weekday}`);
   }
   return dates;
-  
 };
 
 const activities = [
   { id: '1', type: 'Check In', time: '10:00 am', date: 'April 17, 2023', status: 'On Time', imageSource: require('../../images/checkin.png') },
   { id: '2', type: 'Break In', time: '12:30 am', date: 'April 17, 2023', status: 'On Time', imageSource: require('../../images/BreakIcon.png') },
   { id: '3', type: 'Break', time: '16:30 am', date: 'April 17, 2023', status: 'On Time', imageSource: require('../../images/BreakIcon.png') },
+  { id: '4', type: 'Check Out', time: '17:30 am', date: 'April 17, 2023', status: 'On Time', imageSource: require('../../images/BreakIcon.png') },
 ];
 
 const attendanceData = [
@@ -52,7 +52,7 @@ const attendanceData = [
     imageSource: require('../../images/daysIcon.png'),
     time: '28',
     status: 'Working Days',
-  },
+  }
 ];
 
 const HomepageScreen = () => {
@@ -63,62 +63,8 @@ const HomepageScreen = () => {
     setDates(getFormattedDates());
   }, []);
 
-  const renderDateItem = ({ item }) => {
-    const [number, day] = item.split(' ');
+  const profileContainer = () => {
     return (
-      <TouchableOpacity style={[styles.dateTab, item === selectedDate ? styles.activeTab : null]}
-        onPress={() => setSelectedDate(item)}
-      >
-        <View style={styles.dateContent}>
-          <Text style={[styles.dateNumber, item === selectedDate ? styles.activeDateText : null]}>
-            {number}
-          </Text>
-          <Text style={[styles.dateDay, item === selectedDate ? styles.activeDateText : null]}>
-            {day}
-          </Text>
-        </View>
-      </TouchableOpacity>
-    );
-  };
-
-  const renderAttendanceBlock = ({ item }) => (
-    <View style={styles.attendanceBlock}>
-      <View style={styles.attendanceImageContainer}>
-        <Image
-          source={item.imageSource}
-          style={styles.attendanceIcons}
-        />
-        <Text style={styles.attendanceLabel}>{item.type}</Text>
-      </View>
-      <Text style={styles.attendanceTime}>{item.time}</Text>
-      <Text style={styles.attendanceStatus}>{item.status}</Text>
-    </View>
-  );
-
-  const renderActivityItem = ({ item }) => (
-    <View style={styles.activityItem}>
-      <View style={styles.activityItemImgInfo}>
-        <View>
-          <Image source={item.imageSource} style={styles.profileImage} />
-        </View>
-        <View>
-          <Text style={styles.activityType}>{item.type}</Text>
-          <Text style={styles.activityDate}>{item.date}</Text>
-        </View>
-      </View>
-      <View>
-        <Text style={styles.activityTime}>{item.time}</Text>
-        <Text style={styles.activityStatus}>{item.status}</Text>
-      </View>
-    </View>
-  );
-
-  const handleSwipeSuccess = () => {
-    console.log('HomePage swipe successful!');
-  };
-
-  return (
-    <View style={styles.container}>
       <View style={styles.profileContainer}>
         <View style={styles.header}>
           <View style={styles.profileSection}>
@@ -151,7 +97,29 @@ const HomepageScreen = () => {
           />
         </View>
       </View>
+    )
+  }
 
+  const renderDateItem = ({ item }) => {
+    const [number, day] = item.split(' ');
+    return (
+      <TouchableOpacity style={[styles.dateTab, item === selectedDate ? styles.activeTab : null]}
+        onPress={() => setSelectedDate(item)}
+      >
+        <View style={styles.dateContent}>
+          <Text style={[styles.dateNumber, item === selectedDate ? styles.activeDateText : null]}>
+            {number}
+          </Text>
+          <Text style={[styles.dateDay, item === selectedDate ? styles.activeDateText : null]}>
+            {day}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+  const attendanceContainer = () => {
+    return (
       <View style={styles.attendanceContainer}>
         <Text style={styles.attendanceText}>Today Attendance</Text>
         <FlatList
@@ -161,7 +129,28 @@ const HomepageScreen = () => {
           numColumns={2}
         />
       </View>
+    )
+  }
 
+  const renderAttendanceBlock = ({ item }) => {
+    const { imageSource, type, time, status } = item;
+    return (
+      <View style={styles.attendanceBlock}>
+        <View style={styles.attendanceImageContainer}>
+          <Image
+            source={imageSource}
+            style={styles.attendanceIcons}
+          />
+          <Text style={styles.attendanceLabel}>{type}</Text>
+        </View>
+        <Text style={styles.attendanceTime}>{time}</Text>
+        <Text style={styles.attendanceStatus}>{status}</Text>
+      </View>
+    );
+  }
+
+  const activitySection = () => {
+    return (
       <View style={styles.activitySection}>
         <View style={styles.activityViewAllContainer}>
           <Text style={styles.activityTitle}>Your Activity</Text>
@@ -177,10 +166,51 @@ const HomepageScreen = () => {
           />
         </View>
       </View>
+    )
+  }
+
+  const renderActivityItem = ({ item }) => {
+    const { imageSource, type, date, time, status } = item;
+    return (
+      <View style={styles.activityItem}>
+        <View style={styles.activityItemImgInfo}>
+          <View>
+            <Image source={imageSource} style={styles.profileImage} />
+          </View>
+          <View>
+            <Text style={styles.activityType}>{type}</Text>
+            <Text style={styles.activityDate}>{date}</Text>
+          </View>
+        </View>
+        <View>
+          <Text style={styles.activityTime}>{time}</Text>
+          <Text style={styles.activityStatus}>{status}</Text>
+        </View>
+      </View>
+    );
+  }
+
+  const swipeButtonContainer = () => {
+    return (
       <View style={styles.swipeButtonContainer}>
         <SwipeButton onSwipeSuccess={handleSwipeSuccess} />
       </View>
-    </View>
+    )
+  }
+
+  const handleSwipeSuccess = () => {
+    console.log('HomePage swipe successful!');
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+      {profileContainer()}
+      <ScrollView>
+        {attendanceContainer()}
+        {activitySection()}
+        {swipeButtonContainer()}
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

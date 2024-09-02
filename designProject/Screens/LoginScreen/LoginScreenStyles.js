@@ -7,7 +7,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#ffffff",
     paddingHorizontal: 20,
-    justifyContent: 'space-between', // Ensure the content is spaced out properly
+  },
+  contentContainerStyle:{
+    flexGrow: 1 
   },
   iconContainer: {
     marginTop: 30,
@@ -29,7 +31,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   formContainer: {
-    flex: 1, // Ensure the form container takes up space
+    flex: 1,
   },
   inputWrapper: {
     marginBottom: 20,
@@ -107,18 +109,6 @@ const styles = StyleSheet.create({
   },
   googlebutton: {
     backgroundColor: 'white',
-    paddingVertical: 18,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-    borderWidth: 1,
-    marginTop: 10,
-    alignItems: 'center',
-  },
-  googlecontainer:{
-    backgroundColor: "#ffffff",
-  },
-  googlebutton: {
-    backgroundColor: 'white',
     paddingVertical: 15,  
     paddingHorizontal: 20,
     borderRadius: 5,
@@ -139,7 +129,7 @@ const styles = StyleSheet.create({
   },
   registerContainer: {
     alignItems: 'center',
-    marginBottom: 20, 
+    marginVertical: 20,
   },
   registerTextContainer: {
     flexDirection: 'row',
