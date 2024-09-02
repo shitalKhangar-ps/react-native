@@ -56,14 +56,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   dateDayContainer:{ 
-    width:"120%",
+    // width:"120%",
     marginLeft: 20,
   },
   dateTabs: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginVertical: 20,
-    width:"120%",
+    // width:"120%",
   },
   dateTab: {
     paddingVertical: 15,

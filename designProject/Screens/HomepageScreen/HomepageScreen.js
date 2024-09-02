@@ -7,7 +7,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 const getFormattedDates = () => {
   const today = new Date();
   const dates = [];
-  for (let i = -3; i <= 3; i++) {
+  for (let i = -2; i <= 20; i++) {
     const date = new Date(today);
     date.setDate(today.getDate() + i);
     const day = date.getDate().toString().padStart(2, '0');
@@ -15,6 +15,13 @@ const getFormattedDates = () => {
     dates.push(`${day} ${weekday}`);
   }
   return dates;
+};
+
+const getTodayFormattedDate = () => {
+  const today = new Date();
+  const day = today.getDate().toString().padStart(2, '0');
+  const weekday = today.toLocaleDateString('en-US', { weekday: 'short' });
+  return `${day} ${weekday}`;
 };
 
 const activities = [
@@ -57,7 +64,7 @@ const attendanceData = [
 
 const HomepageScreen = () => {
   const [dates, setDates] = useState(getFormattedDates());
-  const [selectedDate, setSelectedDate] = useState(dates[3]);
+  const [selectedDate, setSelectedDate] = useState(getTodayFormattedDate());
 
   useEffect(() => {
     setDates(getFormattedDates());
