@@ -1,7 +1,7 @@
 import { StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
     container: {
-      // flex: 1,
+      flex: 1,
       padding: 20,
       backgroundColor: '#fff',
     },
@@ -172,9 +172,10 @@ export const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
-  }, codeInputContainer: {
+  }, 
+  codeInputContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     marginBottom: 30,
   },
   codeInput: {
@@ -185,6 +186,7 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     textAlign: 'center',
     fontSize: 24,
+    marginHorizontal:10
   },
   timerContainer: {
     flexDirection: 'row',

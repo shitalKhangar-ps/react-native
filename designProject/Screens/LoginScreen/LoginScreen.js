@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import styles from './LoginScreenStyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { ScrollView } from 'react-native-gesture-handler';
 
 function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
@@ -13,6 +14,7 @@ function LoginScreen({ navigation }) {
   };
 
   return (
+    <ScrollView>
     <View style={styles.container}>
       <View style={styles.iconContainer}>
         <Image source={require('../../images/LoginIcon.png')} style={{ borderWidth: 1 }} />
@@ -98,6 +100,7 @@ function LoginScreen({ navigation }) {
         </View>
       </View>
     </View>
+    </ScrollView>
   );
 }
 

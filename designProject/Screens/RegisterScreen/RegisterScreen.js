@@ -2,9 +2,10 @@ import React from 'react';
 import { ScrollView, Text, Image, View,TouchableOpacity } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { styles } from './RgisterScreenStyle';
-import TextInputField from './TextInputField';
+import TextInputField from '../../components/common/TextInputField';
 import CheckboxField from './CheckboxField';
 import { Button, SocialButton } from './Button';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const RegisterScreen = ({navigation}) => {
   const { control, handleSubmit, formState: { errors }, watch } = useForm();
@@ -17,6 +18,7 @@ const RegisterScreen = ({navigation}) => {
   };
 
   return (
+    <SafeAreaView>
     <ScrollView style={styles.container}>
       <Image source={require('../../images/LoginIcon.png')} />
       <Text style={styles.title}>Register Account</Text>
@@ -155,6 +157,7 @@ const RegisterScreen = ({navigation}) => {
         </TouchableOpacity>
       </View>
     </ScrollView>
+    </SafeAreaView>
   );
 };
 

@@ -35,7 +35,7 @@ export const styles = StyleSheet.create({
       borderRadius: 15,
       marginBottom: 16,
       borderWidth:1,
-      paddingRight:40
+      paddingRight:40,
     },
     cardTitle: {
       fontSize: 20,
@@ -169,5 +169,4 @@ export const styles = StyleSheet.create({
   paddingHorizontal:10,
   marginVertical:5
     }
-   
   });

@@ -1,6 +1,8 @@
 import React, { useState , useEffect} from 'react';
 import { ScrollView, View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import {styles} from './VerificationScreenStyle'
+import Illustration from '../../components/common/Illustration';
+import { SafeAreaView } from 'react-native-safe-area-context';
 const VerificationScreen = ({navigation}) => {
   const [code, setCode] = useState(["", "", "", ""]);
   const [timeLeft, setTimeLeft] = useState(30); 
@@ -52,23 +54,15 @@ const VerificationScreen = ({navigation}) => {
   };
 
   return (
-    <ScrollView style={styles.container}>
-         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Image
-          source={require('../../images/BackArrow.png')}
-          style={styles.BackArrowimage}
-          resizeMode="contain"
+    <SafeAreaView>
+    <ScrollView >
+      <View style={styles.container}>
+       <Illustration
+        navigation={navigation}
+        url={require('../../images/verificationicon.png')}
+        title='Enter Verification Code'
+        subtitle=' We have sent the code verification to your mobile number'
         />
-      </TouchableOpacity>
-      <Text style={styles.title}>Enter Verification Code</Text>
-      <Text style={styles.subtitle}>
-        We have sent the code verification to your mobile number
-      </Text>
-      <Image
-        source={require('../../images/verificationicon.png')}
-        style={styles.image}
-        resizeMode="contain"
-      />
       <View style={styles.codeInputContainer}>
         {code.map((digit, index) => (
           <TextInput
@@ -98,7 +92,10 @@ const VerificationScreen = ({navigation}) => {
       <TouchableOpacity style={styles.verifyButton} onPress={()=>navigation.navigate("EnterNewPassword")}>
         <Text style={styles.verifyButtonText}>Verify</Text>
       </TouchableOpacity>
-    </ScrollView>
+   
+      </View>
+       </ScrollView>
+    </SafeAreaView>
   );
 };
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { styles } from './RgisterScreenStyle';
+import { styles } from '../../Screens/RegisterScreen/RgisterScreenStyle';
 
-const TextInputField = ({ label, placeholder, error, secureTextEntry, showPassword, setShowPassword, onChange, onBlur, value }) => (
+const TextInputField = ({ label, placeholder, error, secureTextEntry, showPassword, setShowPassword, onChange, onBlur, value, }) => (
   <View>
   <View style={styles.inputContainer}>
     <Text style={styles.label}>{label}</Text>

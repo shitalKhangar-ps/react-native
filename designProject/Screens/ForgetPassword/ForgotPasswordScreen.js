@@ -2,32 +2,20 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './ForgotPasswordScreenStyles';
-
+import { ScrollView } from 'react-native-gesture-handler';
+import Illustration from '../../components/common/Illustration';
 const ForgotPasswordScreen = ({ navigation }) => {
   const [selectedOption, setSelectedOption] = useState('phone');
 
   return (
+    <ScrollView>
     <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Image
-          source={require('../../images/BackArrow.png')}
-          style={styles.BackArrowimage}
-          resizeMode="contain"
+        <Illustration
+        navigation={navigation}
+        url={require('../../images/ForgetPassword.png')}
+        title='Forgot password 🤔'
+        subtitle='Select which contact details should we use to reset your password.'
         />
-      </TouchableOpacity>
-
-      <Text style={styles.title}>Forgot password 🤔</Text>
-      <Text style={styles.subtitle}>
-        Select which contact details should we use to reset your password.
-      </Text>
-
-      <View style={styles.imageContainer}>
-        <Image
-          source={require('../../images/ForgetPassword.png')}
-          style={styles.image}
-          resizeMode="contain"
-        />
-      </View>
 
       <View style={styles.optionContainer}>
         <TouchableOpacity
@@ -85,6 +73,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
         <Text style={styles.continueButtonText}>Continue</Text>
       </TouchableOpacity>
     </View>
+    </ScrollView>
   );
 };
 
