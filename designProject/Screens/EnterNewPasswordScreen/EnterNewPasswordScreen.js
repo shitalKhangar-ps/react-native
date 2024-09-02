@@ -13,9 +13,9 @@ const EnterNewPasswordScreen = ({navigation}) => {
   
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
     <ScrollView>
-    <View style={styles.container}>
+    <View >
       <Illustration
       navigation={navigation}
       url={require('../../images/newpassword.png')}

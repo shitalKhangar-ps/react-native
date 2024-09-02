@@ -6,9 +6,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f9f9f9',
+    position:"relative"
   },
   profileContainer:{ 
-    backgroundColor: "#ffffff" 
+    backgroundColor: "#ffffff",
+    position:"absolute",
+    width:"100%",
+    top:0,
+    zIndex:999 
   },
   header: {
     flexDirection: 'row',
@@ -51,12 +56,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   dateDayContainer:{ 
-    marginLeft: 20
-   },
+    width:"120%",
+    marginLeft: 20,
+  },
   dateTabs: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginVertical: 20,
+    width:"120%",
   },
   dateTab: {
     paddingVertical: 15,
@@ -66,7 +73,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
     alignItems: 'center',
     borderWidth:1,
-    borderColor:"#D3D3D3"
+    borderColor:"#D3D3D3",
   },
   activeTab: {
     backgroundColor: '#007bff',
@@ -90,7 +97,7 @@ const styles = StyleSheet.create({
   },
   attendanceContainer:{
     paddingHorizontal:20,
-    marginTop:20,
+    marginTop:220,
   },
   attendanceText:{
     fontSize:16,
@@ -147,7 +154,7 @@ const styles = StyleSheet.create({
     color:"blue"
   },
   activitiesList:{
-    height: 150
+    // height: 150
   },
   activityItem: {
     flexDirection: 'row',
@@ -155,7 +162,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderRadius: 10,
     padding: 15,
-    marginBottom: 10,
+    // marginBottom: 5,
   },
   activityItemImgInfo:{ 
     flexDirection: "row"
@@ -189,7 +196,8 @@ const styles = StyleSheet.create({
   },
   swipeButtonContainer:{
     marginHorizontal:20,
-    marginTop:20
+    marginTop:5,
+    marginBottom:30,
   }
 });
 
