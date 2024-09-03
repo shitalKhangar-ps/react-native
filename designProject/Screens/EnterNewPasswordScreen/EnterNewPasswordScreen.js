@@ -25,7 +25,6 @@ const EnterNewPasswordScreen = ({navigation}) => {
       <TextInputField 
             label="Enter New Password"
             placeholder="Enter New Password"
-            // error={errors.password}
             secureTextEntry={!showNewPassword}
             showPassword={showNewPassword}
             setShowPassword={setNewPassword}
@@ -36,7 +35,6 @@ const EnterNewPasswordScreen = ({navigation}) => {
       <TextInputField 
             label="Re-Enter Password"
             placeholder="Enter New Password"
-            // error={errors.password}
             secureTextEntry={!showReEnterPassword}
             showPassword={showReEnterPassword}
             setShowPassword={setReEnterPassword}
