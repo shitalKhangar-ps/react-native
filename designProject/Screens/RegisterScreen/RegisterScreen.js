@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { ScrollView, Text, Image, View,TouchableOpacity } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { styles } from './RgisterScreenStyle';
@@ -6,11 +6,21 @@ import TextInputField from '../../components/common/TextInputField';
 import CheckboxField from './CheckboxField';
 import { Button, SocialButton } from './Button';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
+import DeviceInfo from 'react-native-device-info';
 const RegisterScreen = ({navigation}) => {
   const { control, handleSubmit, formState: { errors }, watch } = useForm();
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+
+  useEffect(() => {
+    const checkDeviceType =  () => {
+      const tablet =  DeviceInfo.isTablet();
+      setIsTablet(tablet);
+    };
+    checkDeviceType();
+  }, []);
+
 
   const onSubmit = (data) => {
     console.log(data);
@@ -18,114 +28,120 @@ const RegisterScreen = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView>
-    <ScrollView style={styles.container}>
+    <SafeAreaView style={styles.container}>
+    <ScrollView >
       <Image source={require('../../images/LoginIcon.png')} />
       <Text style={styles.title}>Register Account</Text>
       <Text style={styles.title}>to<Text style={styles.linkText}> HR Attendee</Text></Text>
       <Text style={styles.subtitle}>Hello there, register to continue</Text>
-
-      <Controller
-        control={control}
-        name="firstName"
-        rules={{ required: 'First name is required' }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInputField
-            label="First Name"
-            placeholder="Enter First Name"
-            error={errors.firstName}
-            onChange={onChange}
-            onBlur={onBlur}
-            value={value}
-          />
-        )}
-      />
-
-      <Controller
-        control={control}
-        name="lastName"
-        rules={{ required: 'Last name is required' }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInputField
-            label="Last Name"
-            placeholder="Enter Last Name"
-            error={errors.lastName}
-            onChange={onChange}
-            onBlur={onBlur}
-            value={value}
-          />
-        )}
-      />
-
-      <Controller
-        control={control}
-        name="email"
-        rules={{ 
-          required: 'Email is required',
-          pattern: {
-            value: /^\S+@\S+$/i,
-            message: 'Invalid email format',
-          }
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInputField
-            label="Email Address"
-            placeholder="Enter Email Address"
-            error={errors.email}
-            onChange={onChange}
-            onBlur={onBlur}
-            value={value}
-          />
-        )}
-      />
-
-      <Controller
-        control={control}
-        name="password"
-        rules={{ 
-          required: 'Password is required',
-          minLength: {
-            value: 8,
-            message: 'Password must be at least 8 characters',
-          }
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInputField
-            label="Password"
-            placeholder="Enter Password"
-            error={errors.password}
-            secureTextEntry={!showPassword}
-            showPassword={showPassword}
-            setShowPassword={setShowPassword}
-            onChange={onChange}
-            onBlur={onBlur}
-            value={value}
-          />
-        )}
-      />
-
-      <Controller
-        control={control}
-        name="confirmPassword"
-        rules={{ 
-          required: 'Please confirm your password',
-          validate: (value) => value === watch('password') || 'Passwords do not match'
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInputField
-            label="Confirm Password"
-            placeholder="Confirm Password"
-            error={errors.confirmPassword}
-            secureTextEntry={!showConfirmPassword}
-            showPassword={showConfirmPassword}
-            setShowPassword={setShowConfirmPassword}
-            onChange={onChange}
-            onBlur={onBlur}
-            value={value}
-          />
-        )}
-      />
-
+        <View style={isTablet ? styles.inputContainerTablet : styles.inputContainerMobile}>
+          <View style={isTablet ? styles.inputFieldContainerTablet : styles.inputFieldContainer}>
+            <Controller
+              control={control}
+              name="firstName"
+              rules={{ required: 'First name is required' }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInputField
+                  label="First Name"
+                  placeholder="Enter First Name"
+                  error={errors.firstName}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                />
+              )}
+            />
+          </View>
+          <View style={isTablet ? styles.inputFieldContainerTablet : styles.inputFieldContainer}>
+            <Controller
+              control={control}
+              name="lastName"
+              rules={{ required: 'Last name is required' }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInputField
+                  label="Last Name"
+                  placeholder="Enter Last Name"
+                  error={errors.lastName}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                />
+              )}
+            />
+          </View>
+          <View style={isTablet ? styles.inputFieldContainerTablet : styles.inputFieldContainer}>
+            <Controller
+              control={control}
+              name="email"
+              rules={{
+                required: 'Email is required',
+                pattern: {
+                  value: /^\S+@\S+$/i,
+                  message: 'Invalid email format',
+                }
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInputField
+                  label="Email Address"
+                  placeholder="Enter Email Address"
+                  error={errors.email}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                />
+              )}
+            />
+          </View>
+          <View style={isTablet ? styles.inputFieldContainerTablet : styles.inputFieldContainer}>
+            <Controller
+              control={control}
+              name="password"
+              rules={{
+                required: 'Password is required',
+                minLength: {
+                  value: 8,
+                  message: 'Password must be at least 8 characters',
+                }
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInputField
+                  label="Password"
+                  placeholder="Enter Password"
+                  error={errors.password}
+                  secureTextEntry={!showPassword}
+                  showPassword={showPassword}
+                  setShowPassword={setShowPassword}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                />
+              )}
+            />
+          </View>
+          <View style={isTablet ? styles.inputFieldContainerTablet : styles.inputFieldContainer}>
+            <Controller
+              control={control}
+              name="confirmPassword"
+              rules={{
+                required: 'Please confirm your password',
+                validate: (value) => value === watch('password') || 'Passwords do not match'
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInputField
+                  label="Confirm Password"
+                  placeholder="Confirm Password"
+                  error={errors.confirmPassword}
+                  secureTextEntry={!showConfirmPassword}
+                  showPassword={showConfirmPassword}
+                  setShowPassword={setShowConfirmPassword}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                />
+              )}
+            />
+          </View>
+        </View>
       <Controller
         control={control}
         name="termsAccepted"

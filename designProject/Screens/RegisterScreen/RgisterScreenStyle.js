@@ -1,7 +1,8 @@
 import { StyleSheet} from 'react-native';
+import{getFontSize,getIconSize} from '../../components/cssHelper/Helper'
 export const styles = StyleSheet.create({
     container: {
-      // flex: 1,
+      flex: 1,
       padding: 20,
       backgroundColor: '#fff',
     },
@@ -14,13 +15,13 @@ export const styles = StyleSheet.create({
     },
     title: {
     color: "#101317",
-    fontSize: 34,
+    fontSize: getFontSize(38,34),
     fontWeight: "600",
      
     },
     subtitle: {
         color: "#d4d6d9",
-    fontSize: 14,
+    fontSize: getFontSize(18,14),
     marginVertical: 10,
     },
     checkboxContainer: {
@@ -30,6 +31,7 @@ export const styles = StyleSheet.create({
     },
     checkbox: {
       marginRight: 8,
+   
     },
   
     input: {
@@ -56,7 +58,7 @@ export const styles = StyleSheet.create({
       marginBottom: 20,
     },
     termsText: {
-      fontSize: 14,
+      fontSize:getFontSize(18,14),
       color: 'gray',
     },
     linkText: {
@@ -70,7 +72,7 @@ export const styles = StyleSheet.create({
     },
     buttonText: {
       color: 'white',
-      fontSize: 16,
+      fontSize: getFontSize(20,16),
       fontWeight: 'bold',
    
     },
@@ -78,6 +80,7 @@ export const styles = StyleSheet.create({
       textAlign: 'center',
       marginVertical: 20,
       color: 'gray',
+      fontSize: getFontSize(16,13),
     },
     googleButton: {
       flexDirection: 'row',
@@ -89,12 +92,12 @@ export const styles = StyleSheet.create({
       borderRadius: 5,
     },
     googleIcon: {
-      width: 30,
-      height: 30,
+      width: getIconSize(40,30),
+      height: getIconSize(40,30),
       marginRight: 10,
     },
     googleButtonText: {
-      fontSize: 16,
+      fontSize: getFontSize(20,16),
     },
     loginContainer: {
       flexDirection: 'row',
@@ -104,7 +107,7 @@ export const styles = StyleSheet.create({
       marginBottom:40
     },
     loginText: {
-        fontSize: 16,
+        fontSize: getFontSize(20,16),
         color: '#000',
     },
     loginLink: {
@@ -118,8 +121,25 @@ export const styles = StyleSheet.create({
       paddingHorizontal: 10,
       borderRadius: 10, 
     },
+    inputContainerMobile:{
+     marginBottom:2  
+    },
+
+    inputContainerTablet:{
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      // justifyContent: 'space-between',
+    },
+    inputFieldContainer: {
+      marginBottom: 5,
+    },
+    inputFieldContainerTablet: {
+      width:'48%',
+      marginRight: 10,
+   
+    },
     label:{
-        fontSize: 15,
+        fontSize: getFontSize(18,15),
         fontWeight:'700',
         paddingHorizontal: 10,
         paddingTop: 5,

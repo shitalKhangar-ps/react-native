@@ -4,10 +4,20 @@ import styles from './HomepageScreenStyles';
 import SwipeButton from '../../components/SwipeButton/SwipeButton';
 import { ScrollView } from 'react-native-gesture-handler';
 import { activities, attendanceData, getFormattedDates, getTodayFormattedDate } from '../../helper/helper';
+import DeviceInfo from 'react-native-device-info';
 
 const HomepageScreen = () => {
   const [dates, setDates] = useState(getFormattedDates());
   const [selectedDate, setSelectedDate] = useState(getTodayFormattedDate());
+  const [isTablet, setIsTablet] = useState(false);
+
+  useEffect(() => {
+    const checkIsTablet = () => {
+      const result = DeviceInfo.isTablet();
+      setIsTablet(result);
+    };
+    checkIsTablet();
+  }, []);
 
   useEffect(() => {
     setDates(getFormattedDates());
@@ -53,20 +63,85 @@ const HomepageScreen = () => {
   const renderDateItem = ({ item }) => {
     const [number, day] = item.split(' ');
     return (
-      <TouchableOpacity style={[styles.dateTab, item === selectedDate ? styles.activeTab : null]}
-        onPress={() => setSelectedDate(item)}
-      >
-        <View style={styles.dateContent}>
-          <Text style={[styles.dateNumber, item === selectedDate ? styles.activeDateText : null]}>
-            {number}
-          </Text>
-          <Text style={[styles.dateDay, item === selectedDate ? styles.activeDateText : null]}>
-            {day}
-          </Text>
-        </View>
-      </TouchableOpacity>
+      isTablet ?
+        (
+          <TouchableOpacity style={[styles.dateTab, item === selectedDate ? styles.activeTab : null]}
+            onPress={() => setSelectedDate(item)}
+          >
+            <View style={styles.dateContent}>
+              <Text style={{ fontSize: 26 }}>
+                {number}
+                {day}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        )
+        :
+        (
+          <TouchableOpacity style={[styles.dateTab, item === selectedDate ? styles.activeTab : null]}
+            onPress={() => setSelectedDate(item)}
+          >
+            <View style={styles.dateContent}>
+              <Text style={[styles.dateNumber, item === selectedDate ? styles.activeDateText : null]}>
+                {number}
+              </Text>
+              <Text style={[styles.dateDay, item === selectedDate ? styles.activeDateText : null]}>
+                {day}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        )
+
     );
   };
+
+  const marginRight = isTablet ? 20 : 0;
+  const paddingVertical = isTablet ? 40 : 0
+  const borderRadius = isTablet ? 100 : 0
+  const renderActivityItem = ({ item }) => {
+    const { imageSource, type, date, time, status } = item;
+    return (
+      <View style={[styles.activityItem, { marginRight, paddingVertical, borderRadius }]}>
+        <View style={[styles.activityItemImgInfo]}>
+          <View>
+            <Image source={imageSource} style={styles.profileImage} />
+          </View>
+          <View>
+            <Text style={styles.activityType}>{type}</Text>
+            <Text style={styles.activityDate}>{date}</Text>
+          </View>
+        </View>
+        <View>
+          <Text style={styles.activityTime}>{time}</Text>
+          <Text style={styles.activityStatus}>{status}</Text>
+        </View>
+      </View>
+    );
+  }
+
+  const activitySection = () => {
+    return (
+      <View style={styles.activitySection}>
+        <View style={styles.activityViewAllContainer}>
+          <Text style={styles.activityTitle}>Your Activity</Text>
+          <TouchableOpacity>
+            <Text style={styles.viewAllTitle}>View All</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.activitiesList}>
+          <FlatList
+            data={activities}
+            renderItem={renderActivityItem}
+            keyExtractor={(item) => item.id}
+            showsHorizontalScrollIndicator={false}
+
+            //isTablet condition
+            horizontal={isTablet ? true : false}
+          />
+        </View>
+      </View>
+    )
+  }
 
   const attendanceContainer = () => {
     return (
@@ -95,47 +170,6 @@ const HomepageScreen = () => {
         </View>
         <Text style={styles.attendanceTime}>{time}</Text>
         <Text style={styles.attendanceStatus}>{status}</Text>
-      </View>
-    );
-  }
-
-  const activitySection = () => {
-    return (
-      <View style={styles.activitySection}>
-        <View style={styles.activityViewAllContainer}>
-          <Text style={styles.activityTitle}>Your Activity</Text>
-          <TouchableOpacity>
-            <Text style={styles.viewAllTitle}>View All</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.activitiesList}>
-          <FlatList
-            data={activities}
-            renderItem={renderActivityItem}
-            keyExtractor={(item) => item.id}
-          />
-        </View>
-      </View>
-    )
-  }
-
-  const renderActivityItem = ({ item }) => {
-    const { imageSource, type, date, time, status } = item;
-    return (
-      <View style={styles.activityItem}>
-        <View style={styles.activityItemImgInfo}>
-          <View>
-            <Image source={imageSource} style={styles.profileImage} />
-          </View>
-          <View>
-            <Text style={styles.activityType}>{type}</Text>
-            <Text style={styles.activityDate}>{date}</Text>
-          </View>
-        </View>
-        <View>
-          <Text style={styles.activityTime}>{time}</Text>
-          <Text style={styles.activityStatus}>{status}</Text>
-        </View>
       </View>
     );
   }

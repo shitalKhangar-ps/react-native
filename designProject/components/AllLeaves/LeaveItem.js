@@ -6,7 +6,7 @@ const LeaveItem = ({ date, applyDays, leaveBalance, approvedBy, status }) => (
     <View style={styles.leaveItem}>
       <View style={styles.leaveItemHeader}>
         <LeaveSubItem
-        title='date'
+        title='Date'
         value={date}
         />
          <View>

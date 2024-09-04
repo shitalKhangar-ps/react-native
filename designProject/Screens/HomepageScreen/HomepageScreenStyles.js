@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet, Platform } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 
@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
     position:"relative"
   },
   profileContainer:{ 
-    backgroundColor: "#ffffff",
+    // backgroundColor: "#ffffff",
+    backgroundColor:Platform.OS === 'ios' ?  "#ffffff" : "lightblue" ,
     position:"absolute",
     width:"100%",
     top:0,
@@ -74,6 +75,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth:1,
     borderColor:"#D3D3D3",
+    backgroundColor:Platform.OS === 'iOS' ?  "lightblue" : "#ffffff" ,
   },
   activeTab: {
     backgroundColor: '#007bff',
@@ -111,7 +113,8 @@ const styles = StyleSheet.create({
   },
   attendanceBlock: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    // backgroundColor: '#ffffff',
+    backgroundColor:Platform.OS === 'iOS' ?  "#ffffff" : "lightblue" ,
     borderRadius: 10,
     padding: 10,
     margin: 8,
@@ -126,7 +129,8 @@ const styles = StyleSheet.create({
     marginRight:10
   },
   attendanceLabel: {
-    fontSize: 16,
+    fontSize: 20,
+    color:Platform.OS === 'iOS' ?  "white" : "black" ,
   },
   attendanceTime: {
     fontSize: 22,
@@ -159,10 +163,11 @@ const styles = StyleSheet.create({
   activityItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: '#ffffff',
+    // backgroundColor: '#ffffff',
+    backgroundColor:Platform.OS === 'iOS' ?  "#ffffff" : "lightblue" ,
     borderRadius: 10,
     padding: 15,
-    // marginBottom: 5,
+    marginBottom: 5,
   },
   activityItemImgInfo:{ 
     flexDirection: "row"
